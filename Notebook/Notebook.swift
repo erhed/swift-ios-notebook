@@ -26,4 +26,12 @@ class Notebook {
         }
         return nil
     }
+    
+    func save(index: Int, note: Note) {
+        notes[index] = note
+    }
+    
+    func delete(noteAtIndex index: Int) {
+        notes.remove(at: index)
+    }
 }

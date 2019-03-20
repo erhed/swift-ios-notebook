@@ -17,7 +17,7 @@ class NoteListCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        addFadeOut()
+        addFadeOutToDescription()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -26,23 +26,12 @@ class NoteListCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func addFadeOut() {
+    func addFadeOutToDescription() {
         let gradient = CAGradientLayer()
         gradient.frame = descriptionLabel.bounds
         gradient.colors = [UIColor.white.cgColor, UIColor.clear.cgColor]
-        
-        //Get Height and width
-        let width = self.bounds.size.width
-        let height = self.bounds.size.height
-        
-        //Calculate the start points and end points
-        let startPointX = CGFloat(0)
-        let startPointY = (height/2)/height
-        let endPointX = CGFloat(1)
-        let endPointY = (height/2)/height
-        
-        gradient.startPoint = CGPoint(x: startPointX, y: startPointY)
-        gradient.endPoint = CGPoint(x: endPointX, y: endPointY)
+        gradient.startPoint = CGPoint(x: 0.7, y: 1)
+        gradient.endPoint = CGPoint(x: 1, y: 1)
         descriptionLabel.layer.mask = gradient
     }
 }

@@ -6,7 +6,7 @@
 //  Copyright © 2019 Erik. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension String {
     
@@ -32,5 +32,11 @@ extension String {
         let start = index(startIndex, offsetBy: range.lowerBound)
         let end = index(start, offsetBy: range.upperBound - range.lowerBound)
         return String(self[start ..< end])
+    }
+}
+
+extension UINavigationController {
+    open override var preferredStatusBarStyle: UIStatusBarStyle {
+        return topViewController?.preferredStatusBarStyle ?? .default
     }
 }

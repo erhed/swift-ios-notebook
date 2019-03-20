@@ -12,14 +12,28 @@ class NoteListTableViewController: UITableViewController {
     
     
     let notebook = Notebook()
+    let createNoteSegueID = "createNoteSegue"
+    let showNoteSegueID = "showNoteSegue"
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "Notes"
+        
         for index in 0..<3 {
-            let note = Note(date: Date(), textContent: "Note #\(index) baltabaltavalta mmmeeee meeeee")
+            let note = Note(date: Date(), textContent: "Note #\(index) baltabaltavalta mmmeeee meeeeek reee")
             notebook.add(note: note)
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -46,5 +60,28 @@ class NoteListTableViewController: UITableViewController {
         }
         
         return cell
+    }
+    
+    // MARK: - Prepare for segue
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == showNoteSegueID {
+            if let destination = segue.destination as? NoteViewController,
+                let cell = sender as? UITableViewCell,
+                let indexPath = tableView.indexPath(for: cell),
+                let note = notebook.note(index: indexPath.row) {
+                destination.notebook = notebook
+                destination.note = note
+                destination.newNote = false
+                destination.noteIndex = indexPath.row
+            }
+        }
+
+        if segue.identifier == createNoteSegueID {
+            if let destination = segue.destination as? NoteViewController {
+                destination.notebook = notebook
+                destination.newNote = true
+            }
+        }
     }
 }

@@ -13,10 +13,13 @@ class Note: CustomStringConvertible {
     var dateCreated: Date
     var dateLastModified: Date
     let dateFormatter = DateFormatter()
+    let dateFormatterWithTime = DateFormatter()
     var textContent: String
     
     var description: String {
-        return textContent.substring(toIndex: 30)
+        let text = textContent.substring(toIndex: 50)
+        let formatText = String(text.filter { !"\n\t\r".contains($0) })
+        return formatText
     }
     
     var created: String {
@@ -24,7 +27,7 @@ class Note: CustomStringConvertible {
     }
     
     var modified: String {
-        return dateFormatter.string(from: dateLastModified)
+        return dateFormatterWithTime.string(from: dateLastModified)
     }
     
     func updateLastModified(date: Date) {
@@ -36,6 +39,7 @@ class Note: CustomStringConvertible {
         self.dateLastModified = date
         self.textContent = textContent
         dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatterWithTime.dateFormat = "yyyy-MM-dd HH:mm"
     }
     
 }

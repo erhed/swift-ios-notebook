@@ -8,9 +8,14 @@
 
 import UIKit
 
-class NoteViewController: UIViewController {
+class NoteViewController: UIViewController, UITextViewDelegate {
 
-    @IBOutlet weak var noteText: UITextView!
+    @IBOutlet weak var noteTextField: UITextView!
+    
+    var notebook: Notebook?
+    var note: Note?
+    var noteIndex: Int?
+    var newNote: Bool = false
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -18,11 +23,51 @@ class NoteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        noteText.contentInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
-        noteText.becomeFirstResponder()
         
-        self.title = "Note"
+        noteTextField.delegate = self
+        //noteTextField.keyboardDismissMode = .interactive
+
+        // UI
+        let backButton = UIBarButtonItem()
+        backButton.title = "Notes"
+        self.navigationController!.navigationBar.topItem!.backBarButtonItem = backButton
+        
+        noteTextField.contentInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        
+        // Create or show - keyboard, title & content
+        if newNote {
+            noteTextField.becomeFirstResponder()
+            self.title = "New"
+        }
+        else {
+            self.title = note?.created
+            noteTextField.text = note?.textContent
+        }
+    }
+    
+    @IBAction func deleteNote(_ sender: Any) {
+        if !newNote {
+            notebook?.delete(noteAtIndex: noteIndex!)
+            self.navigationController?.popViewController(animated: true)
+        }
+        else {
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        if newNote {
+            note = Note(date: Date(), textContent: noteTextField.text)
+            notebook?.add(note: note!)
+            //print("saved NEW")
+            newNote = false
+            noteIndex = (notebook?.count)! - 1
+        }
+        else {
+            //print("saved")
+            note?.textContent = noteTextField.text
+            note?.dateLastModified = Date()
+            notebook?.save(index: noteIndex!, note: note!)
+        }
     }
 }
