@@ -8,7 +8,8 @@
 
 import UIKit
 
-class NoteViewController: UIViewController, UITextViewDelegate {
+class NoteViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
 
     @IBOutlet weak var noteTextField: UITextView!
     
@@ -23,25 +24,19 @@ class NoteViewController: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        noteTextField.delegate = self
-        //noteTextField.keyboardDismissMode = .interactive
 
         // UI
         let backButton = UIBarButtonItem()
         backButton.title = "Notes"
         self.navigationController!.navigationBar.topItem!.backBarButtonItem = backButton
         
-        noteTextField.contentInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
-        
-        // Create or show - keyboard, title & content
+        // Title
         if newNote {
-            noteTextField.becomeFirstResponder()
+            //noteTextField.becomeFirstResponder()
             self.title = "New"
         }
         else {
             self.title = note?.created
-            noteTextField.text = note?.textContent
         }
     }
     
@@ -55,19 +50,55 @@ class NoteViewController: UIViewController, UITextViewDelegate {
         }
     }
     
-    func textViewDidChange(_ textView: UITextView) {
-        if newNote {
-            note = Note(date: Date(), textContent: noteTextField.text)
-            notebook?.add(note: note!)
-            //print("saved NEW")
-            newNote = false
-            noteIndex = (notebook?.count)! - 1
+    // MARK: TableView
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        tableView.keyboardDismissMode = .onDrag
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // InfoCell
+        if indexPath.row == 0 {
+
+            let cell = tableView.dequeueReusableCell(withIdentifier: "infoCell", for: indexPath) as! NoteInfoTableViewCell
+            return cell
+            
         }
+        // TextCell
         else {
-            //print("saved")
-            note?.textContent = noteTextField.text
-            note?.dateLastModified = Date()
-            notebook?.save(index: noteIndex!, note: note!)
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "textCell", for: indexPath) as! NoteTextTableViewCell
+            cell.textChanged {[weak tableView] (_) in
+                DispatchQueue.main.async {
+                    tableView?.beginUpdates()
+                    tableView?.endUpdates()
+                    
+                    // Save for every keypress
+                    if self.newNote {
+                        self.note = Note(date: Date(), textContent: cell.noteTextView.text)
+                        self.notebook?.add(note: self.note!)
+                        //print("saved NEW")
+                        self.newNote = false
+                        self.noteIndex = (self.notebook?.count)! - 1
+                    }
+                    else {
+                        //print("saved")
+                        self.note?.textContent = cell.noteTextView.text
+                        self.note?.dateLastModified = Date()
+                        self.notebook?.save(index: self.noteIndex!, note: self.note!)
+                    }
+                }
+            }
+            
+            if newNote {
+                cell.noteTextView.becomeFirstResponder()
+            } else {
+                cell.noteTextView.text = note?.textContent
+            }
+            
+            return cell
+            
         }
     }
 }
