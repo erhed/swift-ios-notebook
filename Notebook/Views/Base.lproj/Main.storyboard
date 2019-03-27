@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Title-->
+        <!--Note View Controller-->
         <scene sceneID="Wy1-vi-gPY">
             <objects>
                 <viewController id="FSn-Q2-E1J" customClass="NoteViewController" customModule="Notebook" customModuleProvider="target" sceneMemberID="viewController">
@@ -30,15 +30,40 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kPt-bh-xwX">
-                                                    <rect key="frame" x="15" y="11" width="42" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Created:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kPt-bh-xwX">
+                                                    <rect key="frame" x="15" y="14" width="49" height="15"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" red="0.69796954310000003" green="0.69796954310000003" blue="0.69796954310000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Last modified:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3c6-6T-gKM">
+                                                    <rect key="frame" x="15" y="30" width="81" height="15"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" red="0.69796954310000003" green="0.69796954310000003" blue="0.69796954310000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2019-03-20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Voc-20-n8S">
+                                                    <rect key="frame" x="108" y="14" width="130" height="15"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" red="0.69796954310000003" green="0.69796954310000003" blue="0.69796954310000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2019-03-20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3df-Lj-6as">
+                                                    <rect key="frame" x="108" y="30" width="130" height="15"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.69796954310000003" green="0.69796954310000003" blue="0.69796954310000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="dateCreatedLabel" destination="Voc-20-n8S" id="PsW-7B-cSo"/>
+                                            <outlet property="dateLastModifiedLabel" destination="3df-Lj-6as" id="Lbr-qf-wQH"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="textCell" id="WKr-AJ-9hU" customClass="NoteTextTableViewCell" customModule="Notebook" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="72" width="375" height="44"/>
@@ -48,9 +73,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="Hej" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Xqg-4h-WKU">
-                                                    <rect key="frame" x="10" y="0.0" width="355" height="44"/>
+                                                    <rect key="frame" x="10" y="2" width="355" height="42"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
                                             </subviews>
@@ -58,7 +83,7 @@
                                                 <constraint firstItem="Xqg-4h-WKU" firstAttribute="leading" secondItem="jtO-ZL-qLj" secondAttribute="leading" constant="10" id="VAB-8I-2ls"/>
                                                 <constraint firstAttribute="bottom" secondItem="Xqg-4h-WKU" secondAttribute="bottom" id="hzV-s0-EsZ"/>
                                                 <constraint firstAttribute="trailing" secondItem="Xqg-4h-WKU" secondAttribute="trailing" constant="10" id="ky0-Qn-eHI"/>
-                                                <constraint firstItem="Xqg-4h-WKU" firstAttribute="top" secondItem="jtO-ZL-qLj" secondAttribute="top" id="zVQ-qt-c9U"/>
+                                                <constraint firstItem="Xqg-4h-WKU" firstAttribute="top" secondItem="jtO-ZL-qLj" secondAttribute="top" constant="2" id="zVQ-qt-c9U"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -66,6 +91,7 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <sections/>
                                 <connections>
                                     <outlet property="dataSource" destination="FSn-Q2-E1J" id="vSK-tq-Bbv"/>
                                     <outlet property="delegate" destination="FSn-Q2-E1J" id="HQT-27-1tq"/>
@@ -75,7 +101,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="lMG-CI-lUU"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="aMz-Tb-ql0">
+                    <navigationItem key="navigationItem" id="aMz-Tb-ql0">
                         <barButtonItem key="rightBarButtonItem" systemItem="trash" id="hsa-28-5PQ">
                             <connections>
                                 <action selector="deleteNote:" destination="FSn-Q2-E1J" id="hpq-9k-rs7"/>
@@ -127,7 +153,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date last modified" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="68e-8q-Rb6">
                                             <rect key="frame" x="16" y="9" width="168" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.69796954314720816" green="0.69796954314720816" blue="0.69796954314720816" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>

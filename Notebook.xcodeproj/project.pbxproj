@@ -51,6 +51,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0314DBDF22422BEE004CF464 /* Custom Table View Cells */ = {
+			isa = PBXGroup;
+			children = (
+				0324D16B2240F2FB00428659 /* NoteListCell.swift */,
+				0314DBDD22421A97004CF464 /* NoteInfoTableViewCell.swift */,
+				0314DBDB2242186C004CF464 /* NoteTextTableViewCell.swift */,
+			);
+			path = "Custom Table View Cells";
+			sourceTree = "<group>";
+		};
+		0314DBE022422F00004CF464 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0324D1632240057400428659 /* NoteListTableViewController.swift */,
+				0324D161223FFAD700428659 /* NoteViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		0314DBE122422F24004CF464 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0324D1652240E71F00428659 /* Note.swift */,
+				0324D1672240E73100428659 /* Notebook.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0314DBE222423DFF004CF464 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0324D14E223FF81D00428659 /* Main.storyboard */,
+				0324D156223FF81E00428659 /* LaunchScreen.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		0324D13E223FF81D00428659 = {
 			isa = PBXGroup;
 			children = (
@@ -70,20 +107,15 @@
 		0324D149223FF81D00428659 /* Notebook */ = {
 			isa = PBXGroup;
 			children = (
+				0314DBE222423DFF004CF464 /* Views */,
+				0314DBE022422F00004CF464 /* Controllers */,
+				0314DBDF22422BEE004CF464 /* Custom Table View Cells */,
+				0314DBE122422F24004CF464 /* Models */,
 				0324D14A223FF81D00428659 /* AppDelegate.swift */,
-				0324D14E223FF81D00428659 /* Main.storyboard */,
-				0314DBDD22421A97004CF464 /* NoteInfoTableViewCell.swift */,
-				0314DBDB2242186C004CF464 /* NoteTextTableViewCell.swift */,
 				0324D1692240EAAD00428659 /* Extensions.swift */,
-				0324D1652240E71F00428659 /* Note.swift */,
-				0324D1672240E73100428659 /* Notebook.swift */,
 				0324D154223FF81E00428659 /* Assets.xcassets */,
-				0324D156223FF81E00428659 /* LaunchScreen.storyboard */,
 				0324D159223FF81E00428659 /* Info.plist */,
 				0324D151223FF81D00428659 /* Notebook.xcdatamodeld */,
-				0324D1632240057400428659 /* NoteListTableViewController.swift */,
-				0324D16B2240F2FB00428659 /* NoteListCell.swift */,
-				0324D161223FFAD700428659 /* NoteViewController.swift */,
 			);
 			path = Notebook;
 			sourceTree = "<group>";

@@ -10,6 +10,9 @@ import UIKit
 
 class NoteInfoTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var dateCreatedLabel: UILabel!
+    @IBOutlet weak var dateLastModifiedLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

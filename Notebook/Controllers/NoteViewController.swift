@@ -30,14 +30,9 @@ class NoteViewController: UIViewController, UITableViewDelegate, UITableViewData
         backButton.title = "Notes"
         self.navigationController!.navigationBar.topItem!.backBarButtonItem = backButton
         
-        // Title
-        if newNote {
-            //noteTextField.becomeFirstResponder()
-            self.title = "New"
-        }
-        else {
-            self.title = note?.created
-        }
+        // Show/hide keyboard functions
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     @IBAction func deleteNote(_ sender: Any) {
@@ -62,6 +57,15 @@ class NoteViewController: UIViewController, UITableViewDelegate, UITableViewData
         if indexPath.row == 0 {
 
             let cell = tableView.dequeueReusableCell(withIdentifier: "infoCell", for: indexPath) as! NoteInfoTableViewCell
+            
+            if self.newNote {
+                cell.dateCreatedLabel.text = "2019-03-20"
+                cell.dateLastModifiedLabel.text = "-"
+            } else {
+                cell.dateCreatedLabel.text = note?.created
+                cell.dateLastModifiedLabel.text = note?.modified
+            }
+            
             return cell
             
         }
@@ -98,7 +102,24 @@ class NoteViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
             
             return cell
-            
+        }
+    }
+    
+    // MARK: KEYBOARD EVENTS
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            UIView.animate(withDuration: 0.1, animations: { () -> Void in
+                self.micAndCameraView.frame.origin.y -= keyboardSize.height
+            })
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            UIView.animate(withDuration: 0.1, animations: { () -> Void in
+                self.micAndCameraView.frame.origin.y += keyboardSize.height
+            })
         }
     }
 }
